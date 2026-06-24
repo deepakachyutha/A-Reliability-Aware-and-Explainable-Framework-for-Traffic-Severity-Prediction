@@ -1,98 +1,99 @@
-# STRADA: System for Traffic Risk Assessment & Dynamic Analysis
+# A Reliability-Aware and Explainable Framework for Vehicular Accident Severity Prediction
 
-> A reliability-aware and explainable framework for traffic accident severity prediction using machine learning and contextual risk interpretation.
+> A machine learning framework for traffic accident severity prediction that combines reliability-aware risk assessment and explainable safety recommendations.
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange)
-![Research](https://img.shields.io/badge/Research-Project-green)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
+![Research](https://img.shields.io/badge/Research-Framework-green)
 
 ---
 
 ## Overview
 
-STRADA (**System for Traffic Risk Assessment & Dynamic Analysis**) is a research-oriented machine learning framework designed to study accident severity prediction in safety-critical environments.
+Road accidents remain a major public safety challenge worldwide. Although machine learning has demonstrated strong predictive capabilities, many existing approaches prioritize accuracy while overlooking reliability and interpretability.
 
-Unlike conventional prediction systems that focus solely on maximizing accuracy, STRADA emphasizes **reliability, interpretability, and robustness**. The framework combines statistical machine learning with reliability-aware risk interpretation and explainable recommendations to provide meaningful safety insights.
+This repository contains the implementation accompanying the research paper:
 
-The project supports the research paper:
+**"A Reliability-Aware and Explainable Framework for Vehicular Accident Severity Prediction."**
 
-**"A Reliability-Aware and Explainable Framework for Vehicular Accident Severity Prediction"** :contentReference[oaicite:0]{index=0}
+The framework combines machine learning, reliability modeling, and explainable safety support to provide a robust foundation for intelligent transportation systems.
 
 ---
 
 ## Motivation
 
-Traffic accident datasets are highly imbalanced. Most accidents belong to moderate severity classes, causing machine learning models to become overconfident and often fail to recognize rare but critical events.
+Traffic accident datasets are highly imbalanced and contain significant uncertainty. Traditional machine learning models often become overconfident and struggle to recognize rare but critical events.
 
-STRADA aims to address these challenges by:
+This work aims to:
 
-- Building a reliable accident severity prediction framework.
-- Studying uncertainty in safety-critical machine learning.
-- Introducing reliability-aware confidence interpretation.
-- Providing explainable and human-readable safety recommendations.
-- Creating a modular research platform for future experimentation.
+- Predict accident severity using environmental and temporal data.
+- Introduce reliability-aware confidence interpretation.
+- Provide explainable and human-readable safety guidance.
+- Study machine learning behavior in safety-critical domains.
+- Build a modular framework for future intelligent transportation systems.
 
 ---
 
 # Features
 
+### Reliability-Aware Prediction Framework
+
+Transforms raw model confidence into interpretable reliability scores.
+
 ### Accident Severity Prediction
 
-Predicts accident severity from environmental and temporal conditions.
-
-### Reliability-Aware Framework
-
-Transforms model confidence into an interpretable reliability score instead of relying solely on raw probabilities.
+Predicts accident severity from contextual traffic and environmental information.
 
 ### Explainable AI
 
 Provides feature importance analysis and SHAP-based explanations.
 
-### Temporal Risk Modeling
+### Temporal Risk Analysis
 
-Captures accident patterns across hours, weekdays, and seasons.
+Captures accident trends across hours, weekdays, and seasons.
 
 ### Regional Risk Modeling
 
-Uses clustering techniques to incorporate geographical characteristics.
+Uses clustering techniques to account for geographical variations.
 
-### Retrieval-Based Safety Recommendations
+### Safety Recommendation Module
 
-Generates contextual safety guidance using knowledge retrieval methods.
+Generates contextual and human-readable safety suggestions.
 
 ### Interactive Dashboard
 
-Includes a Streamlit interface for exploration and experimentation.
+Streamlit-based interface for experimentation and visualization.
 
 ---
 
 # Dataset
 
-This project utilizes the **US Accidents Dataset**, a large-scale public repository containing traffic accidents collected across the United States.
-
-### Dataset Statistics
+The project utilizes the **US Accidents Dataset**, a large-scale collection of accident records across the United States.
 
 | Property | Value |
 |------------|--------|
 | Total records | ~7.7 Million |
-| Training subset | ~500,000 samples |
+| Training subset | ~500,000 |
 | Time period | 2021–2023 |
 | States covered | 50 |
 | Severity classes | 4 |
 
-The dataset itself is excluded from this repository due to its size.
+Severity labels:
 
-Dataset source:
+| Class | Meaning |
+|-------|---------|
+| 1 | Minor |
+| 2 | Moderate |
+| 3 | Severe |
+| 4 | Fatal |
 
-- US Accidents Dataset (Moosavi et al.)
-- https://www.kaggle.com/datasets/sobhanmoosavi/us-accidents
+> The dataset is not included in this repository due to size constraints.
 
 ---
 
 # Features Used
 
-The model uses structured environmental and temporal variables:
+The framework incorporates:
 
 - Weather conditions
 - Temperature
@@ -102,13 +103,13 @@ The model uses structured environmental and temporal variables:
 - Month
 - Regional clusters
 
-These variables capture both environmental and behavioral patterns associated with traffic accidents.
+These variables capture environmental and temporal factors affecting accident severity.
 
 ---
 
 # Models Evaluated
 
-Multiple models were benchmarked:
+Several machine learning models were benchmarked:
 
 - Random Forest
 - Support Vector Machine (SVM)
@@ -116,39 +117,39 @@ Multiple models were benchmarked:
 - Multi-Layer Perceptron (MLP)
 - XGBoost + SMOTE
 
-Random Forest was selected as the primary model due to its robustness, stability, and interpretability.
+Random Forest was selected as the primary model because of its stability, robustness, and interpretability.
 
 ---
 
-# Project Architecture
+# Framework Architecture
 
 ```
 Input Data
      │
      ▼
-Data Cleaning
+Preprocessing
      │
      ▼
 Feature Engineering
      │
      ▼
-Random Forest Model
+Random Forest Classifier
      │
      ▼
 Reliability Index
      │
      ▼
-Explainability Module
+Explainability Layer
      │
      ▼
-Safety Recommendation System
+Safety Recommendation Module
 ```
 
 ---
 
 # Technologies Used
 
-### Language
+### Programming
 
 - Python
 
@@ -184,20 +185,18 @@ Safety Recommendation System
 # Repository Structure
 
 ```
-STRADA
-│
+.
 ├── data/                  # Dataset (excluded)
-├── notebook/              # Exploratory analysis and experiments
-├── paper/                 # Research paper and documents
-├── research_files/        # Figures and generated outputs
-├── Plots and Images/      # Visualizations
+├── notebook/              # EDA and experiments
+├── paper/                 # Research paper
+├── research_files/        # Figures and outputs
+├── Plots and Images/
 ├── src/
-│   ├── run_xgboost.py
 │   ├── monte_carlo.py
+│   ├── run_xgboost.py
 │   └── training scripts
-│
-├── models/                # Saved models
-├── app.py                 # Streamlit application
+├── models/
+├── app.py
 ├── requirements.txt
 └── README.md
 ```
@@ -206,9 +205,7 @@ STRADA
 
 # Experimental Results
 
-The framework was evaluated on approximately **500,000 post-pandemic accident records**.
-
-### Performance
+Performance on approximately 500,000 post-pandemic accident records:
 
 | Model | Accuracy | Weighted F1 |
 |---------|---------|---------|
@@ -218,31 +215,31 @@ The framework was evaluated on approximately **500,000 post-pandemic accident re
 | MLP | 90.00% | 85.00% |
 | XGBoost + SMOTE | 85.00% | 83.00% |
 
-Although some models achieved slightly higher accuracy, STRADA prioritizes reliability and interpretability over raw performance.
+The proposed framework prioritizes reliability and interpretability over purely maximizing accuracy.
 
 ---
 
 # Future Work
 
-Planned extensions include:
+Future extensions include:
 
-- Real-time traffic prediction
-- OBD-II vehicle telemetry integration
+- Real-time vehicle telemetry integration (OBD-II)
 - Edge deployment using Raspberry Pi
 - Probability calibration techniques
 - Advanced uncertainty estimation
-- Deep learning approaches
-- Live explainable intelligent transportation systems
+- Real-time traffic risk monitoring
+- Calibration-aware learning
+- Intelligent transportation systems
 
 ---
 
-# Research Focus
+# Research Areas
 
 - Machine Learning
-- Explainable AI (XAI)
+- Explainable AI
+- Reliability Modeling
 - Intelligent Transportation Systems
 - Traffic Safety Analytics
-- Reliability Modeling
 - Risk Assessment
 - Safety-Critical AI
 
@@ -260,9 +257,7 @@ Kurnool, India
 
 ---
 
-## Citation
-
-If you find this work useful, please cite:
+# Citation
 
 ```bibtex
 @article{battula2026,
@@ -274,6 +269,6 @@ year={2026}
 
 ---
 
-## Disclaimer
+# Disclaimer
 
-This project is intended for research and educational purposes. It should not be used as the sole decision-making system in real-world autonomous driving or emergency response systems without additional validation and safety mechanisms.
+This repository is intended for research and educational purposes. It should not be used as the sole decision-making system in autonomous vehicles or emergency-response systems without additional validation and safety mechanisms.
