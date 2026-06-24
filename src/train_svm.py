@@ -6,14 +6,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, classification_report, ConfusionMatrixDisplay, f1_score
 
-print("🐢 Training SVM (Experimental Benchmark)...")
+print("Training SVM (Experimental Benchmark)...")
 
 data_path = "data/modern_training_data.csv"
 if not os.path.exists(data_path): data_path = "notebook/modern_training_data.csv"
 df = pd.read_csv(data_path)
 
 # SVM CRASH PREVENTION: Limit to 10k rows
-print("⚠️ Sampling 10,000 rows for SVM stability...")
+print("Sampling 10,000 rows for SVM stability...")
 df = df.sample(10000, random_state=42)
 
 X = df.drop(columns=['Severity'], errors='ignore')

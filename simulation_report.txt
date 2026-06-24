@@ -1,0 +1,14 @@
+Simulation Report (5 Runs)
+
+Model: Random Forest
+   Mean Accuracy: 0.8832 (±0.0024)
+   Mean F1 Score: 0.8515
+
+Model: AdaBoost
+   Mean Accuracy: 0.9021 (±0.0025)
+   Mean F1 Score: 0.8557
+
+Model: SVM
+   Mean Accuracy: 0.9021 (±0.0025)
+   Mean F1 Score: 0.8557
+

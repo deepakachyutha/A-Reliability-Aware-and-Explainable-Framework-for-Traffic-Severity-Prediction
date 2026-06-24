@@ -82,3 +82,4 @@ with open(summary_text, "w") as f:
 print("-" * 55)
 print(f"Report saved to {summary_text}")
 print(f"Total Time: {time.time() - start_time:.1f}s")
+
