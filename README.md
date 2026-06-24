@@ -1,151 +1,196 @@
-# 🚦 Reliability-Aware and Explainable Framework for Vehicular Accident Severity Prediction
+# A Reliability-Aware and Explainable Framework for Vehicular Accident Severity Prediction
 
-A machine learning framework for **traffic accident severity prediction** that combines **Random Forest-based risk assessment**, a **Relative Reliability Index (RRI)**, deterministic safety rules, and explainable safety recommendations. The framework emphasizes **reliability, interpretability, and safety-aware decision support** rather than optimizing only predictive accuracy.
+> Reliability-aware machine learning framework for traffic accident severity prediction with uncertainty estimation and explainable safety guidance.
 
----
-
-## 📌 Overview
-
-Road accident severity prediction models often prioritize accuracy while neglecting uncertainty and interpretability. This project introduces a **Reliability-Aware Framework** that combines probabilistic machine learning with deterministic safety constraints and retrieval-based explanations.
-
-The framework:
-
-- Predicts accident severity using a Random Forest model.
-- Quantifies confidence using the Relative Reliability Index (RRI).
-- Applies fail-safe deterministic safety rules during hazardous conditions.
-- Generates human-readable safety recommendations.
-- Improves reliability under uncertainty and distribution shifts.
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange)
+![Random Forest](https://img.shields.io/badge/Model-Random%20Forest-green)
+![XAI](https://img.shields.io/badge/Explainable-AI-purple)
+![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
 
-## ✨ Features
+## Overview
 
-- 🌲 Random Forest-based severity prediction
-- 📊 Relative Reliability Index (RRI)
-- ⚠️ Deterministic safety override mechanism
-- 🔍 Explainable AI with retrieval-based recommendations
-- 🌎 Cross-region validation across all 50 U.S. states
-- 📈 Feature importance and SHAP analysis
-- 🔄 Reliability-aware decision support
-- 🚗 Designed for future real-time deployment
+This project presents a **reliability-aware and explainable machine learning framework** for predicting vehicular accident severity using large-scale traffic data.
 
----
+Unlike conventional classification systems that focus solely on accuracy, this framework integrates:
 
-## 🏗 Architecture
+- Probabilistic machine learning
+- Reliability estimation through the Relative Reliability Index (RRI)
+- Deterministic safety rules for fail-safe behavior
+- Explainable safety recommendations
+- Cross-region robustness evaluation
 
-```text
-                     Input Features
-                             │
-          ┌──────────────────┴─────────────────┐
-          │                                    │
-          ▼                                    ▼
- Random Forest Classifier          Deterministic Safety Rules
-          │                                    │
-          └─────────────┬──────────────────────┘
-                        ▼
-            Relative Reliability Index (RRI)
-                        │
-                        ▼
-          Retrieval-Based Explanation Module
-                        │
-                        ▼
-              Risk Score + Safety Advisory
-```
+The framework was developed using a post-pandemic subset of the **US Accidents Dataset (2021–2023)** containing approximately **500,000 records**.
 
 ---
 
-## 📂 Dataset
+## Key Features
 
-The framework uses the **US Accidents Dataset**, containing more than **7.7 million traffic records**.
+- **Accident severity prediction**
+- **Relative Reliability Index (RRI)** for uncertainty-aware inference
+- **Hybrid architecture combining ML and rule-based safety logic**
+- **Explainable safety recommendations**
+- **Cross-state robustness validation across 50 U.S. states**
+- **Feature importance and SHAP analysis**
+- **Fast inference (~3 ms/sample)**
 
-For experimentation, a cleaned **post-pandemic subset (2021–2023)** containing approximately **500,000 records** was used to better represent modern traffic conditions.
+---
 
-### Features Used
+## System Architecture
 
-- Weather conditions
+Traffic Data
+│
+├── Environmental Features
+├── Temporal Features
+└── Regional Features
+↓
+Random Forest Classifier
+↓
+Relative Reliability Index (RRI)
+↓
+Deterministic Safety Layer
+↓
+Explainable Recommendation Module
+↓
+Risk Assessment + Safety Advisory
+
+
+---
+
+## Dataset
+
+**Source:** US Accidents Dataset
+
+**Period Used:** 2021–2023
+
+**Records:** ~500,000
+
+### Features
+
 - Visibility
 - Temperature
+- Weather conditions
 - Hour of day
 - Weekday
-- Regional clustering
+- Regional clusters
+
+### Target Classes
+
+| Severity | Description |
+|------------|-------------|
+| 1 | Low |
+| 2 | Moderate |
+| 3 | High |
+| 4 | Critical |
 
 ---
 
-## 🧠 Methodology
+## Relative Reliability Index (RRI)
 
-### 1. Random Forest Prediction
+Traditional models often produce overconfident predictions.
 
-A Random Forest classifier is used to model nonlinear interactions among environmental and temporal features.
+This framework introduces the **Relative Reliability Index (RRI)**, which transforms model confidence into a bounded risk score:
 
-### 2. Relative Reliability Index (RRI)
+RRI = 0 if P < Pmin
+RRI = normalized if Pmin ≤ P < Pmax
+RRI = 100 if P ≥ Pmax
 
-Instead of interpreting raw probabilities directly, predictions are transformed into a reliability score ranging from **0–100**.
 
-The RRI:
+The RRI provides:
 
-- Suppresses low-confidence predictions.
-- Emphasizes high-certainty situations.
-- Improves interpretability.
-- Enables reliability-aware decision making.
-
-### 3. Deterministic Safety Rules
-
-Extreme conditions such as poor visibility can trigger conservative safety overrides to reduce dangerous false negatives.
-
-### 4. Explainable Recommendation Module
-
-Retrieval-based explanations provide context-aware safety advisories in human-readable form.
+- Better uncertainty interpretation
+- Conservative risk signaling
+- Improved edge-case awareness
+- Fail-safe decision support
 
 ---
 
-## 📊 Models Evaluated
+## Models Evaluated
 
-| Model | Accuracy | Weighted F1 Score |
-|---------|---------:|---------:|
-| Proposed Framework (Random Forest) | 88.03% | 84.68% |
+| Model | Accuracy | Weighted F1 |
+|---------|---------|---------|
+| Random Forest (Proposed) | 88.03% | 84.68% |
 | SVM | 90.21% | 85.57% |
 | AdaBoost | 90.21% | 85.57% |
 | MLP | 90.00% | 85.00% |
 | XGBoost + SMOTE | 85.00% | 83.00% |
 
-Although SVM and AdaBoost achieve slightly higher accuracy, they exhibit strong majority-class bias, making them less suitable for safety-critical applications.
+Although several models achieved slightly higher accuracy, Random Forest was selected due to:
+
+- Better stability
+- Higher interpretability
+- Probability outputs enabling reliability-aware inference
+- Compatibility with deterministic safety rules
 
 ---
 
-## 📈 Key Results
+## Performance
 
-### Performance
+### Weighted F1 Score
 
-- **Accuracy:** 88.03%
-- **Weighted F1 Score:** 84.68%
-- **Stability:** ±0.0024 across randomized runs
-- **Average inference time:** 3.1 ms/sample
-- **Training time:** 38.2 seconds
+**0.8468**
 
-### Reliability
+### Accuracy
 
-- RRI identifies uncertain predictions.
-- Deterministic rules improve safety under hazardous conditions.
-- More than 90% of severe-weather false negatives are flagged by the reliability mechanism.
+**88.03%**
+
+### Stability
+
+**±0.0024**
+
+### Average Inference Time
+
+**3.1 ms per sample**
+
+### Training Time
+
+**38.2 seconds**
 
 ---
 
-## 🔬 Feature Importance
+## Explainability
 
-Most influential features:
+The framework incorporates:
+
+- Feature importance analysis
+- SHAP interaction analysis
+- Context-aware safety recommendations
+- Human-readable explanations
+
+Major contributing factors:
 
 1. Hour of day
 2. Region
 3. Weekday
 4. Visibility
-5. Weather conditions
+5. Weather
 6. Temperature
-
-Temporal and regional patterns dominate accident severity prediction, while environmental variables provide additional context.
 
 ---
 
-## 🛠 Tech Stack
+## Reliability-Oriented Design
+
+Unlike conventional classifiers, this framework prioritizes:
+
+- Safety over raw accuracy
+- Conservative behavior under uncertainty
+- Edge-case awareness
+- Interpretability
+- Robustness across geographical regions
+
+This makes the system suitable for:
+
+- Intelligent Transportation Systems
+- Driver Assistance Systems
+- Fleet Risk Assessment
+- Insurance Analytics
+- Smart Mobility Platforms
+
+---
+
+## Tech Stack
 
 ### Languages
 
@@ -161,99 +206,45 @@ Temporal and regional patterns dominate accident severity prediction, while envi
 - Matplotlib
 - Seaborn
 
-### Tools
+### Techniques
 
-- Jupyter Notebook
-- Git
-- GitHub
-
----
-
-## 📁 Project Structure
-
-```text
-TrafficSeverity-Prediction/
-│
-├── data/
-│
-├── notebooks/
-│
-├── models/
-│
-├── src/
-│   ├── preprocessing.py
-│   ├── train.py
-│   ├── predict.py
-│   ├── reliability.py
-│   ├── rules.py
-│   └── explainability.py
-│
-├── results/
-├── figures/
-├── requirements.txt
-└── README.md
-```
+- Random Forest
+- SMOTE
+- Feature Engineering
+- Explainable AI (XAI)
+- Reliability Modeling
+- SHAP Analysis
 
 ---
 
-## 🎯 Applications
+## Future Work
 
-- Intelligent Transportation Systems
-- Risk Assessment Platforms
-- Driver Assistance Systems
-- Explainable AI Research
-- Reliability-Aware Machine Learning
-- Traffic Safety Analytics
-
----
-
-## 🔮 Future Work
-
-- Probability calibration techniques
+- Probability calibration methods
+- Real-time streaming inference
 - OBD-II vehicle integration
-- Real-time deployment
-- Edge-device optimization
-- Advanced uncertainty quantification
-- Graph Neural Networks
-- Transformer-based architectures
+- Edge deployment
+- Lightweight APIs
+- LLM-assisted explanation generation
+- Real-time traffic risk monitoring
 
 ---
 
-## 📚 References
+## Author
 
-- Breiman, L. (2001). Random Forests.
-- Moosavi et al. (2019). US Accidents Dataset.
-- Arrieta et al. (2020). Explainable Artificial Intelligence.
-- Lewis et al. (2020). Retrieval-Augmented Generation.
-- Wang et al. (2019). Road Traffic Accident Severity Prediction Using Machine Learning Models.
+**Deepak Battula**
 
----
+Computer Science Engineering (Artificial Intelligence)
 
-## 📖 Citation
+Email: deepakbattula@outlook.com
 
-```bibtex
-@article{battula2026trafficseverity,
-  title={A Reliability-Aware and Explainable Framework for Vehicular Accident Severity Prediction},
-  author={Battula, Deepak},
-  year={2026}
-}
-```
+LinkedIn: *Add your profile*
+
+GitHub: *Add your GitHub URL*
 
 ---
 
-## 👨‍💻 Author
+## Citation
 
-**Deepak Battula**  
-B.Tech Computer Science Engineering (Artificial Intelligence)  
-G Pullaiah College of Engineering and Technology  
-Kurnool, India
+If you use this work, please cite:
 
-📧 deepakbattula@outlook.com
-
----
-
-## 📜 License
-
-This project is intended for research and educational purposes.
-
----
+> Deepak Battula, *A Reliability-Aware and Explainable Framework for Vehicular Accident Severity Prediction*, 2026.
